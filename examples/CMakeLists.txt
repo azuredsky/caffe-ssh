@@ -12,6 +12,10 @@ foreach(source_file ${examples_srcs})
   target_link_libraries(${name} ${Caffe_LINK})
   caffe_default_properties(${name})
 
+  if(MSVC AND COPY_PREREQUISITES)
+    caffe_copy_prerequisites(${name} USE_HARD_LINKS)
+  endif()
+
   # set back RUNTIME_OUTPUT_DIRECTORY
   set_target_properties(${name} PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/examples/${folder}")
@@ -21,6 +25,10 @@ foreach(source_file ${examples_srcs})
   # install
   install(TARGETS ${name} DESTINATION ${CMAKE_INSTALL_BINDIR})
 
+
+  if(MSVC AND INSTALL_PREREQUISITES)
+    caffe_install_prerequisites(${name} DESTINATION bin)
+  endif()
 
   if(UNIX OR APPLE)
     # Funny command to make tutorials work

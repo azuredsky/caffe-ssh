@@ -19,9 +19,9 @@
 
 # OpenCV dependency (optional)
 
-if(@USE_OPENCV@)
+if(ON)
   if(NOT OpenCV_FOUND)
-    set(Caffe_OpenCV_CONFIG_PATH "@OpenCV_CONFIG_PATH@")
+    set(Caffe_OpenCV_CONFIG_PATH "G:/caffe/caffe-builder/build_v140_x64/libraries")
     if(Caffe_OpenCV_CONFIG_PATH)
       get_filename_component(Caffe_OpenCV_CONFIG_PATH ${Caffe_OpenCV_CONFIG_PATH} ABSOLUTE)
 
@@ -38,25 +38,25 @@ if(@USE_OPENCV@)
 endif()
 
 # Handle other imported targets libraries
-if(@GFLAGS_IMPORTED@)
+if(ON)
   find_package(gflags REQUIRED NO_MODULE)
 endif()
 
-if(@GLOG_IMPORTED@)
+if(ON)
   find_package(glog REQUIRED NO_MODULE)
 endif()
 
-if(@HDF5_IMPORTED@)
+if(ON)
   find_package(HDF5 COMPONENTS C HL REQUIRED NO_MODULE)
 endif()
 
-if(@USE_LMDB@ AND @LMDB_IMPORTED@)
+if(ON AND ON)
   find_package(LMDB REQUIRED NO_MODULE)
 endif()
 
-if(@USE_LEVELDB@ AND @LEVELDB_IMPORTED@)
+if(ON AND ON)
   find_package(LevelDB REQUIRED NO_MODULE)
-  if(@SNAPPY_IMPORTED@)
+  if(ON)
     find_package(Snappy REQUIRED NO_MODULE)
   endif()
 endif()
@@ -74,6 +74,6 @@ endif()
 set(Caffe_LIBRARIES caffe)
 
 # Cuda support variables
-set(Caffe_CPU_ONLY @CPU_ONLY@)
-set(Caffe_HAVE_CUDA @HAVE_CUDA@)
-set(Caffe_HAVE_CUDNN @HAVE_CUDNN@)
+set(Caffe_CPU_ONLY 0)
+set(Caffe_HAVE_CUDA TRUE)
+set(Caffe_HAVE_CUDNN TRUE)
